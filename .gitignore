@@ -1,0 +1,17 @@
+.idea
+*.pyc
+*.prof
+__pycache__
+.mypy_cache
+.coverage
+secrets
+*.pickle
+*.DS_Store
+docker-compose.override.yml
+docker-compose.override.yaml
+.env
+*venv*
+
+
+# config files
+config*
