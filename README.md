@@ -11,7 +11,7 @@ to be extensible for other recipe sites.
 ### Usage
 ```bash
 docker pull anubhavcodes/pyrecipes
-docker container run --rm -v $PWD:/srv pyrecips:latest "hello_fresh_recipe_url"
+docker container run --rm -v $PWD:/srv anubhavcodes/pyrecipes "hello_fresh_recipe_url"
 ```
 
 The above docker run command will generate a `recipe.yml` in the current directory that you can import directly in your 

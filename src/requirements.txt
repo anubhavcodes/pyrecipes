@@ -2,3 +2,4 @@ requests
 bs4
 attrs
 pyyaml
+pytest

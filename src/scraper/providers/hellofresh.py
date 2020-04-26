@@ -1,6 +1,7 @@
 from typing import Dict
 
 from scraper.providers import BaseScraper
+from scraper.providers.utils import format_measurements
 
 
 class HelloFreshScraper(BaseScraper):
@@ -18,7 +19,9 @@ class HelloFreshScraper(BaseScraper):
             'source_url': self.url,
             'servings': '2 servings',
             'categories': ['HelloFresh'],
+            'prep_time': '10 minutes',
             'cook_time': self.cook_time,
+            'total_time': self.cook_time,
         }
 
     @property
@@ -29,18 +32,20 @@ class HelloFreshScraper(BaseScraper):
 
     @property
     def ingredients(self) -> str:
+        measurements = ['ml', 'g', 'Stück']
         parent_tag = self.soup.find('div', {'data-test-id': 'recipeDetailFragment.ingredients'})
         div = list(parent_tag)[3]
-        in_the_box = [tag.text for tag in list(div.children)[0]]  # @TODO return sth like [{'name': .., 'quantity'}]
+        in_the_box = [format_measurements(tag.text, measurements) for tag in list(div.children)[0]]
         div = list(parent_tag)[4]
-        in_your_pantry = [tag.text for tag in list(div.children)[0]]
+        in_your_pantry = [tag.text for tag in list(div.children)[1]]
         return '\n'.join(in_the_box + in_your_pantry)
 
     @property
     def nutritional_info(self) -> str:
+        measurements = ['Portion', '(kJ)', 'kcal)', ]
         parent_tag = self.soup.find('div', {'data-test-id': 'recipeDetailFragment.nutrition-values'})
         div = list(parent_tag)[-1]
-        return '\n'.join([tag.text for tag in list(div.children)[0]])
+        return '\n'.join([format_measurements(tag.text, measurements) for tag in list(div.children)[0]])
 
     @property
     def directions(self) -> str:
