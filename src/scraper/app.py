@@ -8,7 +8,7 @@ from scraper.providers.hellofresh import HelloFreshScraper
 def main(recipe_url: str):
     h = HelloFreshScraper(recipe_url)
     data = h.scrape()
-    with open(data.get("name", "recipes") + "yml", "w") as f:
+    with open(data.get("name", "recipes") + ".yml", "w") as f:
         yaml.dump(data, f)
 
 

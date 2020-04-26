@@ -1,4 +1,7 @@
 from typing import Dict
+from base64 import b64encode
+
+import requests
 
 from scraper.providers import BaseScraper
 from scraper.providers.utils import format_measurements
@@ -11,7 +14,7 @@ class HelloFreshScraper(BaseScraper):
 
     def scrape(self) -> Dict:
         return {
-            "name": self.name,
+            "name": self.name + "-" + self.description,
             "ingredients": self.ingredients,
             "nutritional_info": self.nutritional_info,
             "directions": self.directions,
@@ -21,13 +24,16 @@ class HelloFreshScraper(BaseScraper):
             "prep_time": "10 minutes",
             "cook_time": self.cook_time,
             "total_time": self.cook_time,
+            "photo": self.photo,
         }
 
     @property
     def name(self) -> str:
-        title = self.soup.find("h1").text
-        name = self.soup.find("h4").text
-        return title + " " + name
+        return self.soup.find("h1").text
+
+    @property
+    def description(self) -> str:
+        return self.soup.find("h4").text
 
     @property
     def ingredients(self) -> str:
@@ -57,3 +63,9 @@ class HelloFreshScraper(BaseScraper):
     @property
     def cook_time(self) -> str:
         return self.soup.find("span", {"data-translation-id": "recipe-detail.preparation-time"}).next.next.text
+
+    @property
+    def photo(self) -> str:
+        url = self.soup.find("img", {"alt": self.name}).attrs["src"]
+        r = requests.get(url, headers=self.headers)
+        return b64encode(r.content)
