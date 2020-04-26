@@ -16,4 +16,5 @@ docker-compose.override.yaml
 # config files
 config*
 
-recipe.yml
+# recipes
+*.yml
