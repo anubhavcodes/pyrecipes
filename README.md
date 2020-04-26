@@ -22,6 +22,6 @@ TODO
 - [ ] Add difficulty and preparation to hellofresh
 - [ ] Add images support for hellofresh
 - [ ] Add ability to export to multiple formats
-- [ ] Add ability to set name as recipe as the name of export file
+- [x] Add ability to set name as recipe as the name of export file
 - [ ] Add ability to export multiple recipes in one go
 - [ ] More??
