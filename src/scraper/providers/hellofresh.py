@@ -51,9 +51,8 @@ class HelloFreshScraper(BaseScraper):
         tag = self.soup.find("a", {"data-test-id": "recipeDetailFragment.instructions.downloadLink"})
         div = list(tag.parents)[0]
         all_directions = set([t.text for t in div.next_sibling.next_sibling.find("div").findAll("div") if t.text])
-        return "\n\n".join(
-            sorted([x for x in all_directions if len(x) > 5 and x[0].isdigit()], key=lambda x: int(x[0]))
-        )
+        final_directions = sorted([x for x in all_directions if len(x) > 5 and x[0].isdigit()], key=lambda x: int(x[0]))
+        return "\n\n".join([x[:1] + ". " + x[1:] for x in final_directions])
 
     @property
     def cook_time(self) -> str:
