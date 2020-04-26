@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 from base64 import b64encode
 
 import requests
@@ -68,4 +68,14 @@ class HelloFreshScraper(BaseScraper):
     def photo(self) -> str:
         url = self.soup.find("img", {"alt": self.name}).attrs["src"]
         r = requests.get(url, headers=self.headers)
-        return b64encode(r.content)
+        return HelloFreshScraper.get_b64_encoded_str(r.content)
+
+    @property
+    def step_image_urls(self) -> List[str]:
+        all_images = [t.attrs.get("data-iesrc") for t in self.soup.findAll("picture")]
+        step_images = [img for img in all_images if "step-" in img]
+        return list(set(step_images))
+
+    @staticmethod
+    def get_b64_encoded_str(content: bytes) -> str:
+        return b64encode(content).decode("utf-8")
