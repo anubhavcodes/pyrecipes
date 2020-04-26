@@ -1,4 +1,4 @@
-### pyrecipes
+# pyrecipes
 
 A tool to scrape recipes from popular websites and convert them into usable formats like json, yaml etc. 
 
@@ -19,9 +19,9 @@ paprikaapp.
 
 TODO 
 
-- [] Add difficulty and preparation to hellofresh
-- [] Add images support for hellofresh
-- [] Add ability to export to multiple formats
-- [] Add ability to set name as recipe as the name of export file
-- [] Add ability to export multiple recipes in one go
-- [] More??
+- [ ] Add difficulty and preparation to hellofresh
+- [ ] Add images support for hellofresh
+- [ ] Add ability to export to multiple formats
+- [ ] Add ability to set name as recipe as the name of export file
+- [ ] Add ability to export multiple recipes in one go
+- [ ] More??
