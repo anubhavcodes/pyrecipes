@@ -10,9 +10,18 @@ to be extensible for other recipe sites.
 
 ### Usage
 ```bash
-docker build -t pyrecipes:latest .
+docker pull anubhavcodes/pyrecipes
 docker container run --rm -v $PWD:/srv pyrecips:latest "hello_fresh_recipe_url"
 ```
 
 The above docker run command will generate a `recipe.yml` in the current directory that you can import directly in your 
 paprikaapp.
+
+TODO 
+
+- [] Add difficulty and preparation to hellofresh
+- [] Add images support for hellofresh
+- [] Add ability to export to multiple formats
+- [] Add ability to set name as recipe as the name of export file
+- [] Add ability to export multiple recipes in one go
+- [] More??
