@@ -37,7 +37,7 @@ class HelloFreshScraper(BaseScraper):
 
     @property
     def ingredients(self) -> str:
-        measurements = ["ml", "g", "Stück"]
+        measurements = ["Stück", "ml", "g"]
         parent_tag = self.soup.find("div", {"data-test-id": "recipeDetailFragment.ingredients"})
         div = list(parent_tag)[3]
         in_the_box = [format_measurements(tag.text, measurements) for tag in list(div.children)[0]]
